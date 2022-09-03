@@ -1,4 +1,4 @@
-package top.b0x0.threadpoolspringbootstarter.ThreadPoolAutoConfiguration;
+package top.b0x0.starter.thread;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
