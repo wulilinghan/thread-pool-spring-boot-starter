@@ -1,0 +1,19 @@
+{
+  "groups": [
+    {
+      "name": "custom.tread",
+      "type": "top.b0x0.starter.thread.CustomThreadProperties",
+      "sourceType": "top.b0x0.starter.thread.CustomThreadProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "custom.tread.nameTread",
+      "type": "java.lang.String",
+      "description": "线程名称",
+      "sourceType": "top.b0x0.starter.thread.CustomThreadProperties",
+      "defaultValue": "custom-t-"
+    }
+  ],
+  "hints": []
+}

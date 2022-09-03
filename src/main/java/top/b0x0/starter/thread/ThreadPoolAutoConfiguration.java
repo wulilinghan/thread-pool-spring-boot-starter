@@ -1,8 +1,10 @@
 package top.b0x0.starter.thread;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.annotation.Resource;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -13,15 +15,21 @@ import java.util.concurrent.TimeUnit;
  * @since JDK1.8
  */
 @Configuration
+@EnableConfigurationProperties(CustomThreadProperties.class)
 public class ThreadPoolAutoConfiguration {
+
+    @Resource
+    CustomThreadProperties customThreadProperties;
 
     @Bean("myStarterThreadPool")
     public ThreadPoolExecutor myStarterThreadPool() {
-        int availableProcessors = Runtime.getRuntime().availableProcessors();
-        return new ThreadPoolExecutor(availableProcessors, availableProcessors,
-                60, TimeUnit.SECONDS
-                , new LinkedBlockingQueue<Runnable>(availableProcessors)
-                , new NamedThreadFactory("my-pool-", false)
+        return new ThreadPoolExecutor(
+                customThreadProperties.getCorePoolSize(),
+                customThreadProperties.getMaximumPoolSize(),
+                customThreadProperties.getKeepAliveTime(),
+                customThreadProperties.getTimeUnit()
+                , new LinkedBlockingQueue<Runnable>(customThreadProperties.getQueueCapacity())
+                , new NamedThreadFactory(customThreadProperties.getNameTread(), customThreadProperties.isDaemon())
                 , new ThreadPoolExecutor.CallerRunsPolicy());
 
     }
